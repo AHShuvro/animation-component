@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .a {
+            width: 1vw;
+            height: 700px;
+            background: #4d2d4a;
+            transition-property: width;
+            transition-duration: 1s;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .animate {
+            animation: fadeIn 0s forwards;
+            width: 74vw;
+            /* Add the final width here */
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+
+        .img {
+            width: 56.84vw;
+            height: 570px;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+            transition: width 2s, height 4s;
+            transform-origin: 50% 65%;
+            transition: transform 4s, filter 3s ease-in-out;
+            filter: brightness(100%);
+        }
+
+        .imgdiv {
+            position: absolute;
+            right: 0;
+            overflow: hidden;
+        }
+
+        .imgAnimate {
+            filter: brightness(100%);
+            transform: scale(1.27);
+        }
+
+        .brandImgContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brandImg {
+            opacity: 0;
+            animation: customFadeInAnimation 2s forwards;
+        }
+
+        @keyframes customFadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.2;
+            }
+            30% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            60% {
+                opacity: 0.6;
+            }
+            70% {
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="a">
+            <div class="brandImgContainer">
+                <img class="brandImg" src="https://maesa.com/wp-content/uploads/2023/07/ITK-Logo-Resize-3.png" alt="">
+            </div>
+            <div></div>
+        </div>
+        <div class="imgdiv">
+            <img class="img" src="https://maesa.com/wp-content/uploads/2023/07/ITK-Homepage-1200x831.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var slide = document.querySelector('.a');
+            var img = document.querySelector('.img');
+
+            var observer = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) {
+                    slide.classList.add('animate');
+                    img.classList.add('imgAnimate');
+                    observer.disconnect();
+                }
+            }, { threshold: 0.5 }); // Adjust the threshold as needed
+
+            observer.observe(slide);
+            observer.observe(img);
+        });
+    </script>
+</body>
+
+</html>
